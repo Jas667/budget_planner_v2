@@ -1,0 +1,31 @@
+body {
+    background-color: rgb(206, 255, 255);
+}
+
+
+#categoryEnvelopesList {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+#expenses {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+  }
+
+  .categoryEnvelopeDisplay {
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 25px;
+    padding: 10px;
+    margin: 10px;
+  }
+
+.expenseDisplay {
+    padding: 5px 5px;
+}
