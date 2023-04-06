@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const categoriesRouter = require('./src/categories/routes.js')
 const expensesRouter = require('./src/expenses/routes.js')
+const cashBalanceRouter = require('./src/currentBalance/routes.js')
 
 //for parsing incoming into json
 const bodyParser = require('body-parser');
@@ -19,6 +20,7 @@ app.use(express.static('public'));
 //router for categories
 app.use('/categories', categoriesRouter);
 app.use('/expenses', expensesRouter);
+app.use('/cashbalance', cashBalanceRouter);
 
 //serve homepage (index.html)
 app.get('/', (req, res) => {

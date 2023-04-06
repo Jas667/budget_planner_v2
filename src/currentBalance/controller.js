@@ -1,0 +1,28 @@
+const db = require('./queries.js');
+const pool = require('../../database.js')
+
+const getCurrentBalance = (req, res) => {
+    pool.query(db.getCurrentBalanceQuery, (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).send(results.rows)
+    })
+};
+
+const updateCurrentBalance = (req, res) => {
+    const { cash_balance } = req.body
+
+    pool.query(db.updateCashBalanceQuery, [cash_balance], (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).send({created: `Cash balance has been updated to: ${cash_balance}`})
+    })
+};
+
+
+module.exports = {
+    getCurrentBalance,
+    updateCurrentBalance,
+}

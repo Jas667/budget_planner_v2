@@ -1,4 +1,8 @@
-const getAllExpensesQuery = `SELECT * FROM expenses`;
+const getAllExpensesQuery = 
+`SELECT expenses.amount, expenses.date, expenses.categories_id, categories.name
+FROM expenses
+JOIN categories
+	ON expenses.categories_id = categories.categories_id`;
 const getExpenseByIdQuery = `SELECT * FROM expenses WHERE expenses_id = $1`;
 const getExpensesByCategoryQuery = `SELECT * FROM expenses WHERE categories_id = $1`;
 const deleteExpenseByIdQuery = `DELETE FROM expenses WHERE expenses_id = $1`;
