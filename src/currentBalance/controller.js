@@ -21,8 +21,32 @@ const updateCurrentBalance = (req, res) => {
     })
 };
 
+const addToCurrentBalance = (req, res) => {
+    const { cash_balance } = req.body
+
+    pool.query(db.addToCashBalance, [cash_balance], (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).send({created: `Cash balance has been updated!`})
+    })
+};
+
+const subtractFromCurrentBalance = (req, res) => {
+    const { cash_balance } = req.body
+
+    pool.query(db.subtractFromCashBalance, [cash_balance], (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).send({created: `Cash balance has been updated!`})
+    })
+};
+
 
 module.exports = {
     getCurrentBalance,
     updateCurrentBalance,
+    addToCurrentBalance,
+    subtractFromCurrentBalance,
 }
