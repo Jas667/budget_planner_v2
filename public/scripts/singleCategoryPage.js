@@ -110,7 +110,7 @@ deleteNewCategoryButton.addEventListener('click', async (event) => {
     const categoryId = await getCategoryId();
 
     try {
-        const confirm = window.confirm("Are you sure you want to delete this category?");
+        const confirm = window.confirm("Are you sure you want to delete this category? This will also delete all expenses associated with this category. Cash balance will NOT be adjusted.");
         if (confirm) {
             const results = await fetch(`http://localhost:3000/categories/${categoryId}`, {method: 'DELETE'});
             console.log("Category deleted");
@@ -143,10 +143,27 @@ expenses.addEventListener('click', async (expense) => {
 const deleteSelectedExpenseButton = document.getElementById('deleteSelectedExpenseButton');
 deleteSelectedExpenseButton.addEventListener('click', async (event) => {
     try {
+        const currentlySelectedExpense = await document.getElementById("currentlySelectedExpense");
+
+        //if currentlySelectedExpense has no child elements then no expense has been selected. Alert user to select an expense
+        if (!currentlySelectedExpense.firstChild) {
+            alert("Please select an expense to delete");
+            return;
+        }
+
+        //get id of currently selected expense
+        const expenseId = await currentlySelectedExpense.firstChild.id;
+
+        //if expenseId is undefined then no expense has been selected. Alert user to select an expense
+        if (!expenseId) {
+            alert("Please select an expense to delete");
+                //exit function
+                return;
+            }
+    
+
         const confirm = window.confirm("Are you sure you want to delete this expense?");
         if (confirm) {
-            const currentlySelectedExpense = document.getElementById("currentlySelectedExpense");
-            const expenseId = currentlySelectedExpense.firstChild.id;
 
             //check if user would like to also adjust cash balance when they delete an expense
             const adjustCashBalance = window.confirm("Would you like to adjust your cash balance when you delete this expense?");
@@ -187,6 +204,15 @@ deleteSelectedExpenseButton.addEventListener('click', async (event) => {
 const updateSelectedExpenseButton = document.getElementById('updateSelectedExpenseButton');
 updateSelectedExpenseButton.addEventListener('click', async (event) => {
     try {
+        const currentlySelectedExpense = await document.getElementById("currentlySelectedExpense");
+        const expenseId = await currentlySelectedExpense.firstChild.innerHTML;
+        
+        //if expenseId is undefined then no expense has been selected. Alert user to select an expense
+        if (expenseId === undefined) {
+            alert("Please select an expense to update");
+            return;
+        }
+
         const confirm = window.confirm("Are you sure you want to update this expense?");
         if (confirm) {
             const currentlySelectedExpense = await document.getElementById("currentlySelectedExpense");

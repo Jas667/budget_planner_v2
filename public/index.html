@@ -11,27 +11,28 @@
 <body>
     <h1>Personal Budget V2</h1>
     <div id="cashSection">
-        <h2>Cash</h2>
         <b id="currentBalanceLabel">Current Balance:</b> 
         <span id="currentBalance">
         </span>
         <button id="adjustCashButton">
-           Adjust Cash
+           Adjust Cash Balance
         </button>
         <input type="number" id="adjustCashInput" placeholder="Enter New Amount">
         <button id="confirmAdjustCashButton">Adjust</button>
+        <a href="/" id="cancelButton"><button>Cancel</button></a>
         <div id="cash">
 
         </div>
     </div>
     <div id="categoryEnvelopes">
-        <h2>Category Envelopes</h2>
+        <h2>Categories</h2>
+        <p>(Click a category for category expenses)</p>
         <div id="categoryEnvelopesList">
 
         </div>
         <div id="addCategoryEnvelope">
             <a href="./addCategory.html"><button>
-                Add Category Envelope
+                Add New Category
             </button></a>
         </div>
     </div>

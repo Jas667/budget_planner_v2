@@ -91,6 +91,10 @@ button:hover {
   display: none;
 }
 
+#cancelButton {
+  display: none;
+}
+
 .singleExpenseDisplay {
   padding: 10px;
   margin: 10px;
@@ -102,4 +106,24 @@ button:hover {
   color: #1e1f31;
   transition: box-shadow 0.15s ease,transform 0.15s ease;
   align-items: left;
+}
+
+#addCategoryEnvelope, #deleteNewCategoryDiv {
+  text-align: center;
+}
+
+
+h1, h2 {
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+}
+
+b {
+  text-transform: uppercase;
+}
+
+p {
+  text-align: center;
+  text-transform: uppercase;
 }

@@ -69,6 +69,7 @@ const currentBalanceSection = document.getElementById('currentBalance');
 const currentBalanceLabel = document.getElementById('currentBalanceLabel');
 const adjustCashInput = document.getElementById('adjustCashInput');
 const confirmAdjustCashButton = document.getElementById('confirmAdjustCashButton');
+const cancelButton = document.getElementById('cancelButton');
 
 
 //event listener which will show input field and submit button when adjust cash button is clicked
@@ -78,6 +79,7 @@ adjustCashButton.addEventListener('click', async () => {
     currentBalanceLabel.style.display = 'none';
     adjustCashInput.style.display = 'inline-flex';
     confirmAdjustCashButton.style.display = 'inline-flex';
+    cancelButton.style.display = 'inline-flex';
 });
 
 confirmAdjustCashButton.addEventListener('click', async () => {
@@ -102,6 +104,7 @@ confirmAdjustCashButton.addEventListener('click', async () => {
         currentBalanceLabel.style.display = 'inline-flex';
         adjustCashInput.style.display = 'none';
         confirmAdjustCashButton.style.display = 'none';
+        cancelButton.style.display = 'none';
         displayCashBalance();
     }
 });
