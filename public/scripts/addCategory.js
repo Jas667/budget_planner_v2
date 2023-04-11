@@ -2,7 +2,7 @@ const displayCategoryEnvelopes = async () => {
     try {
         const categoryEnvelopesList = document.getElementById("categoryEnvelopesList");
 
-        const results = await fetch(`${__dirname}/categories`, {method: 'GET'})
+        const results = await fetch(`https://budget-planner-v2.herokuapp.com/categories`, {method: 'GET'})
         const categories = await results.json();
 
         //remove all child elements from categoryEnvelopesList
@@ -37,7 +37,7 @@ createNewCategoryButton.addEventListener('click', async () => {
     try {
         const newCategoryNameValue = await newCategoryName.value;
 
-        const results = await fetch(`${__dirname}/categories`, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({name: newCategoryNameValue})});
+        const results = await fetch(`https://budget-planner-v2.herokuapp.com/categories`, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({name: newCategoryNameValue})});
 
         const response = await results.json();
         console.log(response);
