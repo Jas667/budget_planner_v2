@@ -9,7 +9,7 @@ const displayCashBalance = async () => {
     try {
         const cashBalanceSpan = document.getElementById('currentBalance');
         //query to return current cash balance
-        const results = await fetch('http://localhost:3000/cashbalance', {method: 'GET'});
+        const results = await fetch('https://budget-planner-v2.herokuapp.com/cashbalance', {method: 'GET'});
         const cashBalance = await results.json();
         //display current cash balance. cash_balance is the column name in the cash_balance table. Position 0 is the first row in the table which is where cash balance is stored.
         cashBalanceSpan.innerHTML = `${cashBalance[0].cash_balance}`;
@@ -25,7 +25,7 @@ const displaySingleCategory = async () => {
 
         const categoryEnvelopesList = document.getElementById("categoryEnvelopesList");
 
-        const results = await fetch(`http://localhost:3000/categories/${categoryId}`, {method: 'GET'})
+        const results = await fetch(`https://budget-planner-v2.herokuapp.com/categories/${categoryId}`, {method: 'GET'})
         const category = await results.json();
 
         //remove all child elements from categoryEnvelopesList
@@ -52,7 +52,7 @@ const displaySingleExpense = async (expenseId) => {
 
         const currentlySelectedExpense = document.getElementById("currentlySelectedExpense");
 
-        const results = await fetch(`http://localhost:3000/expenses/${expenseId}`, {method: 'GET'})
+        const results = await fetch(`https://budget-planner-v2.herokuapp.com/expenses/${expenseId}`, {method: 'GET'})
         const expense = await results.json();
 
         //remove all child elements from currentlySelectedExpense
@@ -81,7 +81,7 @@ const displayExpensesForCategory = async () => {
 
         const expensesDiv = document.getElementById('expenses');
 
-        const results = await fetch(`http://localhost:3000/expenses/category/${categoryId}`, {method: 'GET'});
+        const results = await fetch(`https://budget-planner-v2.herokuapp.com/expenses/category/${categoryId}`, {method: 'GET'});
         const expenses = await results.json();
 
         //Delete all child elements displaying expenses and re-load them. This allows for no duplicates after delete/add/update
@@ -112,9 +112,9 @@ deleteNewCategoryButton.addEventListener('click', async (event) => {
     try {
         const confirm = window.confirm("Are you sure you want to delete this category? This will also delete all expenses associated with this category. Cash balance will NOT be adjusted.");
         if (confirm) {
-            const results = await fetch(`http://localhost:3000/categories/${categoryId}`, {method: 'DELETE'});
+            const results = await fetch(`https://budget-planner-v2.herokuapp.com/categories/${categoryId}`, {method: 'DELETE'});
             console.log("Category deleted");
-            window.location.href = "http://localhost:3000/";
+            window.location.href = "https://budget-planner-v2.herokuapp.com/";
         }
     } catch (error) {
         console.log("Error deleting category: ", error);
@@ -169,20 +169,20 @@ deleteSelectedExpenseButton.addEventListener('click', async (event) => {
             const adjustCashBalance = window.confirm("Would you like to adjust your cash balance when you delete this expense?");
             if (adjustCashBalance) {
                 //query expenses and get amount of currently selected expense
-                const expenseResults = await fetch(`http://localhost:3000/expenses/${expenseId}`, {method: 'GET'});
+                const expenseResults = await fetch(`https://budget-planner-v2.herokuapp.com/expenses/${expenseId}`, {method: 'GET'});
                 const expense = await expenseResults.json();
                 //get the amount from the expense
                 const amountOfExpense = expense[0].amount;
 
                 //update cash balance
-                const cashBalanceUpdate = await fetch('http://localhost:3000/cashbalance/add', {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({cash_balance: amountOfExpense})});
+                const cashBalanceUpdate = await fetch('https://budget-planner-v2.herokuapp.com/cashbalance/add', {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({cash_balance: amountOfExpense})});
 
                 //delete expense
-                const results = await fetch(`http://localhost:3000/expenses/${expenseId}`, {method: 'DELETE'});
+                const results = await fetch(`https://budget-planner-v2.herokuapp.com/expenses/${expenseId}`, {method: 'DELETE'});
 
             } else {
                 //this else statement handles if user decides NOT to update cash balance when deleting an expense
-                const results = await fetch(`http://localhost:3000/expenses/${expenseId}`, {method: 'DELETE'});
+                const results = await fetch(`https://budget-planner-v2.herokuapp.com/expenses/${expenseId}`, {method: 'DELETE'});
             }
         }
     } catch (error) {
@@ -227,7 +227,7 @@ updateSelectedExpenseButton.addEventListener('click', async (event) => {
                 return;
             }
             //get the amount of selected expense. This will then be used to determine if the cash balance needs to be updated by adding or subtracting
-            const expenseResults = await fetch(`http://localhost:3000/expenses/${expenseId}`, {method: 'GET'});
+            const expenseResults = await fetch(`https://budget-planner-v2.herokuapp.com/expenses/${expenseId}`, {method: 'GET'});
             const expense = await expenseResults.json();
             const expenseAmount = expense[0].amount;
             //remove first letter from expenseAmount to get rid of the £ sign + make a number rather than string
@@ -241,15 +241,15 @@ updateSelectedExpenseButton.addEventListener('click', async (event) => {
                 //check if the amount of the expense is greater than the new amount. If it is, then the cash balance needs to be updated by subtracting the difference between the two. If it is not, then the cash balance needs to be updated by adding the difference between the two.
                 if (expenseAmountWithoutPoundSign > amount) {
                     //update cash balance
-                    const cashBalanceUpdate = await fetch('http://localhost:3000/cashbalance/add', {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({cash_balance: (expenseAmountWithoutPoundSign - amount)})});
+                    const cashBalanceUpdate = await fetch('https://budget-planner-v2.herokuapp.com/cashbalance/add', {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({cash_balance: (expenseAmountWithoutPoundSign - amount)})});
 
                 } else {
                     //update cash balance
-                    const cashBalanceUpdate = await fetch('http://localhost:3000/cashbalance/subtract', {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({cash_balance: (amount - expenseAmountWithoutPoundSign)})});
+                    const cashBalanceUpdate = await fetch('https://budget-planner-v2.herokuapp.com/cashbalance/subtract', {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({cash_balance: (amount - expenseAmountWithoutPoundSign)})});
                 }
             }
                 //update selected expense
-                const results = await fetch(`http://localhost:3000/expenses/`, {method: 'PUT', headers: {
+                const results = await fetch(`https://budget-planner-v2.herokuapp.com/expenses/`, {method: 'PUT', headers: {
                 'Content-Type': 'application/json'
                 }, body: JSON.stringify({amount: amount, date: date, categories_id: categoryId, expenses_id: expenseId})});
 
@@ -288,10 +288,10 @@ addNewExpenseButton.addEventListener('click', async (event) => {
             }
 
             //update cash balance, subtracting new expense amount
-            const cashBalanceUpdate = await fetch('http://localhost:3000/cashbalance/subtract', {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({cash_balance: amount})});
+            const cashBalanceUpdate = await fetch('https://budget-planner-v2.herokuapp.com/cashbalance/subtract', {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({cash_balance: amount})});
 
             //add selected expense
-            const results = await fetch(`http://localhost:3000/expenses/`, {method: 'POST', headers: {
+            const results = await fetch(`https://budget-planner-v2.herokuapp.com/expenses/`, {method: 'POST', headers: {
                 'Content-Type': 'application/json'
             }, body: JSON.stringify({amount: amount, date: date, categories_id: categoryId})});
         }

@@ -2,7 +2,7 @@ const displayCashBalance = async () => {
     try {
         const cashBalanceSpan = document.getElementById('currentBalance');
         //query to return current cash balance
-        const results = await fetch('http://localhost:3000/cashbalance', {method: 'GET'});
+        const results = await fetch('https://budget-planner-v2.herokuapp.com/cashbalance', {method: 'GET'});
         const cashBalance = await results.json();
         //display current cash balance. cash_balance is the column name in the cash_balance table. Position 0 is the first row in the table which is where cash balance is stored.
         cashBalanceSpan.innerHTML = `${cashBalance[0].cash_balance}`;
@@ -15,7 +15,7 @@ const displayCategoryEnvelopes = async () => {
     try {
         const categoryEnvelopesList = document.getElementById("categoryEnvelopesList");
 
-        const results = await fetch('http://localhost:3000/categories', {method: 'GET'})
+        const results = await fetch('https://budget-planner-v2.herokuapp.com/categories', {method: 'GET'})
         const categories = await results.json();
 
         categories.forEach(category => {
@@ -38,7 +38,7 @@ const displayAllExpenses = async () => {
     try {
         const expensesDiv = document.getElementById('expenses');
 
-        const results = await fetch('http://localhost:3000/expenses', {method: 'GET'});
+        const results = await fetch('https://budget-planner-v2.herokuapp.com/expenses', {method: 'GET'});
         const expenses = await results.json();
 
         expenses.forEach(expense => {
@@ -88,7 +88,7 @@ confirmAdjustCashButton.addEventListener('click', async () => {
         const newCashBalance = await Number(adjustCashInput.value);
 
         //update the cash balance in the database
-        const results = await fetch('http://localhost:3000/cashbalance', {
+        const results = await fetch('https://budget-planner-v2.herokuapp.com/cashbalance', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -118,7 +118,7 @@ categoryEnvelopesList.addEventListener('click', async (category) => {
         //get the id of the category that was clicked;
         const categoryId = category.target.id;
         //redirect to singleCategoryPage and send categoryId as a query parameter
-        window.location.href = `http://localhost:3000/singleCategoryPage.html?categoryId=${categoryId}`;
+        window.location.href = `https://budget-planner-v2.herokuapp.com/singleCategoryPage.html?categoryId=${categoryId}`;
     }
 });
 
@@ -141,7 +141,7 @@ categoryEnvelopesList.addEventListener('click', async (category) => {
 //         if (window.confirm(`Are you sure you want to delete activity: ${activity.target.innerHTML}`)) {
 //             try {
 //                 //fetch request to delete activity if user confirms
-//                 const result = await fetch(`http://localhost:3000/todo/${activity.target.id}`, {method: 'DELETE'});
+//                 const result = await fetch(`https://budget-planner-v2.herokuapp.com/todo/${activity.target.id}`, {method: 'DELETE'});
 //                 //reload activities after delete has processed
 //                 readActivities();
 
