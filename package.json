@@ -1,6 +1,6 @@
 {
   "name": "budget_planner_v2",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Codecademy project. Build a personal budget application using node, express, postgresql and javascript. The application will then be altered so that it can be uploaded and run on heroku",
   "main": "server.js",
   "scripts": {
