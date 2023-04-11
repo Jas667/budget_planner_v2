@@ -22,12 +22,6 @@ app.use('/categories', categoriesRouter);
 app.use('/expenses', expensesRouter);
 app.use('/cashbalance', cashBalanceRouter);
 
-//serve homepage (index.html)
-app.get('/', (req, res) => {
-    res.status(200).send();
-})
-
-
 app.listen(PORT, () => { // start server and listen on specified port
     console.log(`App listening on port: ${PORT}`); // confirm server is running and log port to the console
 });

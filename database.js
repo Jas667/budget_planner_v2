@@ -9,3 +9,18 @@ const pool = new Pool({ // create connection to database
 });
 
 module.exports = pool;
+
+//if running on local machine, use this code instead of the above code
+
+// const Pool = require('pg').Pool;
+
+// //create pool for database
+// const pool = new Pool({
+//     database: "personal_budget_v2",
+//     port: 5432,
+//     host: "localhost",
+//     user: "postgres",
+//     password: '',
+// });
+
+// module.exports = pool;
