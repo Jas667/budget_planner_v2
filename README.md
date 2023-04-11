@@ -35,6 +35,8 @@ To work with an individual expense, simply click on it and it will be added to t
 
 The Personal Budget V2 is set up to deploy to Heroku. In order to run on local computer, database.js will need to be updated and a database created to suit (diagram above). Primary keys are set to SERIAL to auto-increment. The foreign key in expenses should be set to ON DELETE CASCADE. That allows all expenses to be deleted if a category is removed.
 
+All fetch() requests will also need to be updated, replacing the Heroku URLs as required.
+
 updated database file:
 
 const Pool = require('pg').Pool;
