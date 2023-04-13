@@ -8,39 +8,41 @@
     <script src="../scripts/indexScript.js" defer></script>
     <link rel="stylesheet" href="./style.css">
 </head>
-<body>
-    <h1>Personal Budget V2</h1>
-    <div id="cashSection">
-        <b id="currentBalanceLabel">Current Balance:</b> 
-        <span id="currentBalance">
-        </span>
-        <button id="adjustCashButton">
-           Adjust Cash Balance
-        </button>
-        <input type="number" id="adjustCashInput" placeholder="Enter New Amount">
-        <button id="confirmAdjustCashButton">Adjust</button>
-        <a href="/" id="cancelButton"><button>Cancel</button></a>
-        <div id="cash">
+<div id="bodyWrap">
+    <body>
+        <h1>Personal Budget V2</h1>
+        <div id="cashSection">
+            <b id="currentBalanceLabel">Current Balance:</b> 
+            <span id="currentBalance">
+            </span>
+            <button id="adjustCashButton">
+            Adjust Cash Balance
+            </button>
+            <input type="number" id="adjustCashInput" placeholder="Enter New Amount">
+            <button id="confirmAdjustCashButton">Adjust</button>
+            <a href="/" id="cancelButton"><button>Cancel</button></a>
+            <div id="cash">
 
+            </div>
         </div>
-    </div>
-    <div id="categoryEnvelopes">
-        <h2>Categories</h2>
-        <p>(Click a category for category expenses)</p>
-        <div id="categoryEnvelopesList">
+        <div id="categoryEnvelopes">
+            <h2>Categories</h2>
+            <p>(Click a category for category expenses)</p>
+            <div id="categoryEnvelopesList">
 
+            </div>
+            <div id="addCategoryEnvelope">
+                <a href="./addCategory.html"><button>
+                    Add New Category
+                </button></a>
+            </div>
         </div>
-        <div id="addCategoryEnvelope">
-            <a href="./addCategory.html"><button>
-                Add New Category
-            </button></a>
+        <div id="expensesList">
+            <h2>Expenses</h2>
+            <div id="expenses">
+                
+            </div>
         </div>
-    </div>
-    <div id="expensesList">
-        <h2>Expenses</h2>
-        <div id="expenses">
-            
-        </div>
-    </div>
-</body>
+    </body>
+</div>
 </html>
