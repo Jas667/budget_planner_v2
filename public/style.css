@@ -127,3 +127,7 @@ p {
   text-align: center;
   text-transform: uppercase;
 }
+
+#adjustCashButton {
+  margin-top: 15px;
+}
